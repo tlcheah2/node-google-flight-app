@@ -2,7 +2,10 @@
 require('dotenv').config();
 const express = require('express')
 const mongoose = require('mongoose');
+const routeHandler = require('./src/routeHandler');
+
 const app = express()
+
 const port = 3000
 
 // Init MongoDB Connection
@@ -15,7 +18,6 @@ db.on('connected', () => {
 });
 mongoose.connect(process.env.mongodb_uri, {useNewUrlParser: true, authSource: 'admin', ssl: true});
 
-
-app.get('/', (req, res) => res.send('Welcome to Google Flight App!'))
+app.use(routeHandler);
 
 app.listen(port, () => console.log(`Google Flight App listening on port ${port}!`))
