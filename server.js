@@ -18,6 +18,8 @@ db.on('connected', () => {
 });
 mongoose.connect(process.env.mongodb_uri, {useNewUrlParser: true, authSource: 'admin', ssl: true});
 
+// Parse incoming request with json payload
+app.use(express.json());
 app.use(routeHandler);
 
 app.listen(port, () => console.log(`Google Flight App listening on port ${port}!`))
